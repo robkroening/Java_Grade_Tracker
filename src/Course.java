@@ -2,10 +2,10 @@ public class Course {
     // attributes
     private String courseCode;
     private String courseName;
-    private double creditHours;
+    private int creditHours;
 
     // constructor
-    public Course(String courseCode, String courseName, double creditHours) {
+    public Course(String courseCode, String courseName, int creditHours) {
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.creditHours = creditHours;

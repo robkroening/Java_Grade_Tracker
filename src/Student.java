@@ -36,6 +36,7 @@ public class Student {
     // the student
     public void addGrade(Grade grade) {
         // no logic in here yet
+        // make sure not to add a duplicate grade as well
         grades.add(grade);
     }
 
