@@ -18,5 +18,11 @@ public class Main {
 
         // remember each method should only do ONE thing like printing OR returning a
         // value
+
+        // School school = new School();
+        // System.out.println(school.addStudent("S001 ", "Alice"));
+        // System.out.println(school.addStudent(" S001", "Alice"));
+        // System.out.println(school.findStudentById("S001") != null);
+        // System.out.println(school.findStudentById("S999") == null);
     }
 }
