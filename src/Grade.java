@@ -17,8 +17,4 @@ public class Grade {
     public Course getCourse() {
         return course;
     }
-
-    // public String getLetterGrade() {
-    // return "";
-    // }
 }
