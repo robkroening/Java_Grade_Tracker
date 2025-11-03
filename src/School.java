@@ -7,12 +7,6 @@ public class School {
     private final HashMap<String, Student> studentsById = new HashMap<>();
     private final HashMap<String, Course> courseByCode = new HashMap<>();
 
-    // constructor
-    // public School() {
-    // this.students = new ArrayList<>();
-    // this.courses = new ArrayList<>();
-    // }
-
     // methods
     public boolean addStudent(String studentId, String name) {
         // validate input - can't be empty id or name - can't be null
@@ -77,12 +71,14 @@ public class School {
         return true;
     }
 
+    // DON'T NEED THIS YET
     public void removeStudent() {
         // validate input
         // check and see if student exists in the school
         // remove them from the student hashmap
     }
 
+    // DON'T NEED THIS YET
     public void removeCourse() {
         // validate input
         // check and see if course exists in the school
