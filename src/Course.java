@@ -23,16 +23,4 @@ public class Course {
     public double getCreditHours() {
         return creditHours;
     }
-
-    // public void setCreditHours(double creditHours) {
-    // this.creditHours = creditHours;
-    // }
-
-    // public void setCourseName(String courseName) {
-    // this.courseName = courseName;
-    // }
-
-    // public void setCourseCode(String courseCode) {
-    // this.courseCode = courseCode;
-    // }
 }
