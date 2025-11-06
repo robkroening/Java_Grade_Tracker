@@ -149,8 +149,20 @@ public class School {
 
         // create a new grade
         Grade gradeToAssign = new Grade(courseToGrade, numericScore);
-        // assign the grade to the student
-        studentToGrade.addGrade(gradeToAssign);
-        return true;
+
+        // assign the grade to the student and return the boolean value
+        return studentToGrade.addGrade(gradeToAssign);
+    }
+
+    // list all students in the school
+    // return collection because it gives flexibility for list, set, etc
+    public Collection<Student> getAllStudents() {
+        return studentsById.values();
+    }
+
+    // list all courses in the school
+    // return collection because it gives flexibility for list, set, etc
+    public Collection<Course> getAllCourses() {
+        return courseByCode.values();
     }
 }
