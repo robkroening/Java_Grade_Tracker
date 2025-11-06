@@ -20,7 +20,7 @@ public class Course {
         return courseCode;
     }
 
-    public double getCreditHours() {
+    public int getCreditHours() {
         return creditHours;
     }
 }
