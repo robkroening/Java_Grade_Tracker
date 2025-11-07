@@ -25,7 +25,7 @@ public class Main {
             }
 
             // handle user choice boundaries
-            if (userChoice < 1 || userChoice > 7) {
+            if (userChoice < 1 || userChoice > 9) {
                 System.out.println("Invalid option. Please press enter to continue.");
                 Main.waitForEnter(scanner); // wait for enter press
                 continue;
@@ -35,15 +35,14 @@ public class Main {
             switch (userChoice) {
                 case 1:
                     // add a student to the school
-                    System.out.println("Please enter in a student ID for the new student: ");
-                    String studentId = scanner.nextLine();
                     System.out.println("Please enter the student's name: ");
                     String name = scanner.nextLine();
-                    boolean okStudentAdd = school.addStudent(studentId, name);
-                    if (okStudentAdd == true) {
-                        System.out.println("Student added!");
+                    Student studentToAdd = school.addStudent(name);
+                    if (studentToAdd == null) {
+                        System.out.println("Could not add student. Name is required!");
                     } else {
-                        System.out.println("Could not add the student (invalid or dupe ID).");
+                        System.out.println(
+                                "Student " + studentToAdd.getName() + " added with ID: " + studentToAdd.getStudentId());
                     }
                     waitForEnter(scanner);
                     break;
@@ -123,6 +122,27 @@ public class Main {
                     Main.waitForEnter(scanner);
                     break;
                 case 7:
+                    // save data
+                    boolean okSave = school.saveToFiles("data");
+                    if (okSave) {
+                        System.out.println("saved to /data");
+                    } else {
+                        System.out.println("Unable to save to /data. please try again.");
+                    }
+                    Main.waitForEnter(scanner);
+                    break;
+                case 8:
+                    // load data
+                    boolean okLoad = school.loadFromFiles("data");
+                    if (okLoad) {
+                        System.out.println("All files were loaded from /data correctly.");
+                        Main.waitForEnter(scanner);
+                    } else {
+                        System.out.println("Load from /data failed.");
+                        Main.waitForEnter(scanner);
+                    }
+                    break;
+                case 9:
                     // exit the program
                     System.out.println("Goodbye!");
                     Main.waitForEnter(scanner);
@@ -145,26 +165,21 @@ public class Main {
     // show the menu options
     private static void printMenu() {
         System.out.println("Please select what you'd like to do: ");
-        // 1 - Add Student
         System.out.println("Press (1) to: Add a Student");
-        // 2 - Add Course
         System.out.println("Press (2) to: Add a Course");
-        // 3 - Assign a grade
         System.out.println("Press (3) to: Assign a Grade");
-        // 4 - Print Transcript
         System.out.println("Press (4) to: Print Transcript");
-        // 5 - Print all Students
         System.out.println("Press (5) to: Print all Students");
-        // 6 - Print all Courses
         System.out.println("Press (6) to: Print all Courses");
-        // 7 - Exit the Program
-        System.out.println("Press (7) to: Exit the Program");
+        System.out.println("Press (7) to: Save Data");
+        System.out.println("Press (8) to: Load Data");
+        System.out.println("Press (9) to: Exit the Program");
     }
 
     // take in a user input of the selection they choose
     private static int userChoice(Scanner scanner) {
         try {
-            System.out.println("Please choose an action (1, 2, 3, 4, 5, 6, 7): ");
+            System.out.println("Please choose an action (1, 2, 3, 4, 5, 6, 7, 8, 9): ");
             int decision = Integer.parseInt(scanner.nextLine());
             return decision;
         } catch (Exception e) {
