@@ -321,7 +321,7 @@ public class School {
                         // create the array from the line
                         String[] studentLine = line.split("\t", -1);
                         // tell the program if the array for each line is < 3 keep iterating
-                        if (studentLine.length < 3) {
+                        if (studentLine.length < 2) {
                             continue; // continue iterating even if there is missing data on the line
                         }
                         // pull student values out of the array
