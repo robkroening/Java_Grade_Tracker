@@ -135,6 +135,9 @@ public class Main {
                     // load data
                     boolean okLoad = school.loadFromFiles("data");
                     if (okLoad) {
+                        for (Student s : school.getAllStudents()) {
+                            s.calculateGPA();
+                        }
                         System.out.println("All files were loaded from /data correctly.");
                         Main.waitForEnter(scanner);
                     } else {
@@ -232,7 +235,9 @@ public class Main {
         }
 
         for (Student student : allStudentsList) {
-            System.out.println(student.getStudentId() + ": " + student.getName());
+            student.calculateGPA();
+            System.out.println(student.getStudentId() + ": " + student.getName() + "    |   GPA "
+                    + String.format("%.2f", student.getGpa()));
         }
     }
 

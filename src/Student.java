@@ -5,7 +5,7 @@ public class Student {
     // attributes
     private String studentId;
     private String name;
-    // private double gpa;
+    private double gpa = 0.0;
     private List<Grade> grades;
 
     // constructor --> initialize attributes
@@ -82,38 +82,63 @@ public class Student {
     }
 
     // calculate GPA
-    public double calculateGPA() {
-        // loop through the entire student grade list
-        // translate the grade to the associated GPA point
-        // add up all the grades and divide by the total amount
-        // viola! there is the student's GPA
-        if (this.grades.isEmpty()) {
-            return Double.NaN;
+    // now becomes WEIGHTED
+    public boolean calculateGPA() {
+        // calculate weighted GPA
+        // check if grades are empty, if they are then no GPA to calculate
+        // loop thru list of grades, get the points from every associated grade from the
+        // enum
+        if (this.grades.isEmpty() || this.grades == null) {
+            this.gpa = 0.0;
+            return false;
         }
 
-        double totalPoints = 0;
+        // weighted gpa is total quality points / total credits
+        double totalQualityPoints = 0;
+        double totalCredits = 0;
 
         for (Grade aGrade : this.grades) {
-            // get the total amount of points
-            double score = aGrade.getNumericScore();
-            if (score >= 90 && score <= 100) {
-                totalPoints = totalPoints + 4.0;
-            } else if (score >= 80 && score < 90) {
-                totalPoints = totalPoints + 3.0;
-            } else if (score >= 70 && score < 80) {
-                totalPoints = totalPoints + 2.0;
-            } else if (score >= 70 && score < 70) {
-                totalPoints = totalPoints + 1.0;
-            } else {
-                totalPoints = totalPoints + 0.0;
+            // figure out the score for the grade
+            // figure out the credits of the class
+            // from this, get the points
+            // add points to total points
+            // then divide total points by number of grades
+
+            // if theres no grade or no course go to next iteration
+            if (aGrade == null || aGrade.getCourse() == null) {
+                continue;
             }
+
+            // get the credit hours of the class
+            int credits = aGrade.getCourse().getCreditHours();
+
+            // 0 credit classes will not affect GPA -> next iteration
+            if (credits <= 0) {
+                continue;
+            }
+
+            // get the weighted gpa score for a grade
+            double points = aGrade.getGradePoints();
+            // add to the sum of the quality points
+            totalQualityPoints = totalQualityPoints + (credits * points);
+            // add to the sum of total credits
+            totalCredits = totalCredits + credits;
         }
 
-        int numGrades = this.grades.size();
+        // if all the credits were 0 credit hour courses, then gpa is unaffected
+        // gpa is 0.0 by policy
+        if (totalCredits == 0) {
+            this.gpa = 0.0;
+        }
 
-        double calculatedGPA = totalPoints / numGrades;
-        // this.gpa = calculatedGPA;
-        return calculatedGPA;
+        // calculate the weighted GPA
+        this.gpa = totalQualityPoints / totalCredits;
+        return true;
+    }
+
+    // get GPA
+    public double getGpa() {
+        return gpa;
     }
 
     // print transcript
@@ -135,8 +160,7 @@ public class Student {
         }
 
         // gpa
-        double gpa = calculateGPA();
-        System.out.println("Your GPA is: " + gpa);
+        System.out.println("Your GPA is: " + getGpa());
     }
 
 }
